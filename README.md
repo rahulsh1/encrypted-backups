@@ -58,6 +58,15 @@ pip install python-gnupg
     $ ./backup_folders.py -q -z -zd -e target -l backup.log ~/Documents/code/github/my_project ~/backup/full/
 
 ### With encryption
+You need to run `create_keys.py` once to generate the gpg public/private keys. This is created under `$HOME/.gpghome`
+
+    # Create one time config with email-id with given password
+    $ ./create_keys.py user@domain
+      Password:
 
     # Creating the backup
     $ ./backup_folders.py -q -e target -l backup.log -u user@domain ~/Documents/code/github/my_project ~/backup/encrypted/
+
+    # Decrypting the file. This will generate my_project.tgz in ~/backup/encrypted directory.
+    $ ./decrypt_file.py ~/backup/encrypted/my_project.tgz.gpg
+    Password:
