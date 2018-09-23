@@ -11,12 +11,15 @@ Install the missing modules using `easy_install` or `pip`.
 
 ### For encryption, you need GPG
 > OSX
-brew install gpg
+
+    brew install gpg
+
 > Linux
-apt install gpg
+
+    apt install gpg
 
 Then install
-pip install python-gnupg
+`pip install python-gnupg`
 
 ## Script
 
@@ -69,4 +72,4 @@ You need to run `create_keys.py` once to generate the gpg public/private keys. T
 
     # Decrypting the file. This will generate my_project.tgz in ~/backup/encrypted directory.
     $ ./decrypt_file.py ~/backup/encrypted/my_project.tgz.gpg
-    Password:
+    Password: *****
