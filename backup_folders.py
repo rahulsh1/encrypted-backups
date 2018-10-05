@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os
 from shutil import rmtree
@@ -34,20 +34,6 @@ def delete_files(ending, indirectory):
                 except OSError:
                     logging.warning("Could not delete {}/{}".format(r, files))
                     pass
-
-# delete the trash files such as *.tmp, *.bak, *.dmp
-def delete_trash(args):
-    # Delete actual files first
-    if args.trash:
-        file_types = ["tmp", "bak", "dmp"]
-        for file_type in file_types:
-            delete_files(file_type, backupdir)
-        # Empty trash can
-        try:
-            rmtree(os.path.expanduser("~/.local/share/Trash/files"))
-        except OSError:
-            logging.warning("Could not empty the trash or trash already empty.")
-            pass
 
 # Creates a tgz, deletes the directory if requested and encrypts with gpg too
 def zip_it(args, sourcedir, destinationdir):
@@ -104,7 +90,7 @@ def main():
     parser.add_argument("-q", "--quiet", help="Do not print to stdout.", action="store_true")
     parser.add_argument("-z", "--zip", help="Create tgz file for the directory", action="store_true")
     parser.add_argument("-zd", "--zipdel", help="Create tgz file for the directory and delete the directory", action="store_true")
-    parser.add_argument("-u", "--encruseremail", help="Enable encryption with given user-email already configured")
+    parser.add_argument("-u", "--useremail", help="Enable encryption with given user-email already configured")
 
     args = parser.parse_args()
     backupdir = args.BACKUPDIR
@@ -132,8 +118,6 @@ def main():
 
     # Check if source exist
     check_dir_exist(backupdir)
-    # Delete all the trash if requested
-    delete_trash(args)
     # Perform the backup now
     doBackup(logfile, exclusions, args.quiet, backupdir, destinationdir)
 
