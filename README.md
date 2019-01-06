@@ -24,7 +24,8 @@ Then install
 ## Script
 
     ./backup_folders.py -h
-    usage: backup_folders.py [-h] [-e EXCLUDE] [-l LOGFILE] [-q] [-z] [-zd] [-u USEREMAIL]
+    usage: backup_folders.py [-h] [-e EXCLUDE] [-l LOGFILE] [-q] [-z]
+                          [-zn ZIPNAME] [-zd] [-u USEREMAIL]
                           BACKUPDIR DESTINATIONDIR
 
     positional arguments:
@@ -39,6 +40,8 @@ Then install
                            Specify the logfile.
      -q, --quiet           Do not print to stdout.
      -z, --zip             Create tgz file for the directory
+     -zn ZIPNAME, --zipname ZIPNAME
+                           Create named tgz file for the directory
      -zd, --zipdel         Create tgz file for the directory and delete the directory
      -u USEREMAIL, --encruseremail USEREMAIL
                            email-id for encryption purposes
@@ -54,8 +57,8 @@ Then install
     # Backup 'my_dir_one' to '~/backup/full' in Quiet mode, logging to backup.log
     $ ./backup_folders.py -q -l backup.log ~/Documents/my_dir_one ~/backup/full/
 
-    # Backup directory and also create a tgz file
-    $ ./backup_folders.py -q -z -e target -l backup.log ~/Documents/code/github/my_project ~/backup/full/
+    # Backup directory and also create a named tgz file called backup1.tgz
+    $ ./backup_folders.py -q -z -e target -l backup.log -zn backup1 ~/Documents/code/github/my_project ~/backup/full/
 
     # Backup directory and also create a tgz file and delete the directory from backup folder
     $ ./backup_folders.py -q -z -zd -e target -l backup.log ~/Documents/code/github/my_project ~/backup/full/

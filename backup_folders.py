@@ -40,6 +40,9 @@ def zip_it(args, sourcedir, destinationdir):
     tail = sourcedir.split('/')[-1:][0]
     dest_dir = destinationdir + tail
     dest_file = dest_dir + ".tgz"
+    if args.zipname:
+        dest_file = args.zipname + ".tgz"
+        
     #print('tail = ' + tail + ' dest_file=' + dest_file)
     if args.zip or args.zipdel:
         sh.tar("-cvzf", dest_file, "-C", destinationdir, tail)
@@ -89,6 +92,7 @@ def main():
     parser.add_argument("-l", "--logfile", help="Specify the logfile to monitor.")
     parser.add_argument("-q", "--quiet", help="Do not print to stdout.", action="store_true")
     parser.add_argument("-z", "--zip", help="Create tgz file for the directory", action="store_true")
+    parser.add_argument("-zn", "--zipname", help="Create named tgz file for the directory")
     parser.add_argument("-zd", "--zipdel", help="Create tgz file for the directory and delete the directory", action="store_true")
     parser.add_argument("-u", "--useremail", help="Enable encryption with given user-email already configured")
 
